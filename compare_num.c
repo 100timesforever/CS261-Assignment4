@@ -27,9 +27,12 @@
 int compare(TYPE left, TYPE right)
 {
     /*FIXME: write this*/
+
+	//printf("In compare\n");
+
 	struct data * l = left;
 	struct data * r = right;
-	printf("%d\n", r->number);
+	//printf("r: %d || l: %d\n", r->number, l->number);
 
 	if(l->number < r->number) {
 		return(-1);

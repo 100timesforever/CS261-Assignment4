@@ -124,46 +124,47 @@ int sizeBSTree(struct BSTree *tree) { return tree->cnt; }
 */
 struct Node *_addNode(struct Node *cur, TYPE val)
 {
-	struct Node * new = malloc(sizeof(struct Node));
     /*FIXME:write this*/	
+	
+
+	//if the tree is empty, simply malloc new memory, fill it with the value,
+	//and return it to addBSTree to set as the root.
 	if(cur == NULL) {
-		cur = new;
+		//printf("Adding the root\n");
+		cur = malloc(sizeof(struct Node));
 		cur->val = val;
 		cur->left = NULL;
 		cur->right = NULL;
 		return(cur);
 	}
-	if(compare(cur->val, val) == 1) {
-		if(cur->left != NULL) {
-			_addNode(cur->left, val);
-		}
-		else {
 
-			new->val = val;
-			new->right = NULL;
-			new->left = NULL;
-			cur->left = new;
-			return(new);
+	else{
+		if(compare(cur->val, val) == 1) {
+			//printf("adding to the left\n");
+			
+			//if it is less than the current value, it goes in the left
+			//Treat the left as a sub tree, and find the root of it.
+			cur->left = _addNode(cur->left, val); 
+			//printf("Test: value of compare: %d\n", compare(cur->left->val, val));
 		}
-	}
-	else if(compare(cur->val, val) == -1) {
-		if(cur->right != NULL) {
-			_addNode(cur->right, val);
+	
+		else if(compare(cur->val, val) == -1) {
+			//printf("adding to the right\n");
+			//Here, if it is greater than the curent value, find the root of the 
+			//right sub tree, otherwise known as cur->right
+		
+			cur->right = _addNode(cur->right, val);
 		}
-		else {
-			new->val = val;
-			new->left = NULL;
-			new->right = NULL;
-			cur->right = new;
-			return(new);
+	
+		else if(compare(cur->val, val) == 0) {
+			printf("The value you input is already contained in the tree. We shall put it to the right.\n");
+			cur->right = _addNode(cur->right, val);
 		}
+	
+		//at the end, we return cur, so that after the last subtree's root is added
+		//it recursively goes back up the tree, reaffirming each links position
+	    return cur;
 	}
-	else if(compare(cur->val, val) == 0) {
-		printf("The value you input is already contained in the tree.");
-		return(new);
-	}
-
-    return NULL;
 }
 
 /*
