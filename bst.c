@@ -124,7 +124,39 @@ int sizeBSTree(struct BSTree *tree) { return tree->cnt; }
 */
 struct Node *_addNode(struct Node *cur, TYPE val)
 {
-    /*write this*/
+    /*FIXME:write this*/
+	
+	if(compare(cur->val, val) == 1) {
+		if(cur->left != NULL) {
+			_addNode(cur->left, val);
+		}
+		else {
+			struct Node * new = malloc(sizeof(struct Node));
+
+			new->val = val;
+			new->right = NULL;
+			cur->left = new;
+			return(new);
+		}
+	}
+	else if(compare(cur->val, val) == -1) {
+		if(cur->right != NULL) {
+			_addNode(cur->right, val);
+		}
+		else {
+			struct Node * new = malloc(sizeof(struct Node));
+
+			new->val = val;
+			new->left = NULL;
+			cur->right = new;
+			return(new);
+		}
+	}
+	else if(compare(cur->val, val) == 0) {
+		printf("The value you input is already contained in the tree.");
+		return(NULL);
+	}
+
     return NULL;
 }
 
@@ -158,7 +190,32 @@ void addBSTree(struct BSTree *tree, TYPE val)
 /*----------------------------------------------------------------------------*/
 int containsBSTree(struct BSTree *tree, TYPE val)
 {
-    /*write this*/
+    /*FIXME:write this*/
+	struct Node * temp = malloc(sizeof(struct Node));
+	struct Node * itr = tree->root;
+	temp->val = val;
+	while(1) {
+		if(compare(itr->val, temp->val) == 1) {
+			if(itr->left != NULL) {
+				itr = itr->left;
+			}
+			else {
+				return(0);
+			}
+		}
+		else if(compare(itr->val, temp->val) == -1) {
+			if(itr->right != NULL) {
+				itr = itr->right;
+			}
+			else {
+				return(0);
+			}
+		}
+		else if(compare(itr->val, temp->val) == 0) {
+			return(1);
+		}
+	}
+			
     return 0;
 }
 
@@ -173,7 +230,15 @@ int containsBSTree(struct BSTree *tree, TYPE val)
 /*----------------------------------------------------------------------------*/
 TYPE _leftMost(struct Node *cur)
 {
-    /*write this*/
+    /*FIXME:write this*/
+	while(1) {
+		if(cur->left == NULL) {
+			return(cur->val);
+		}
+		else {
+			cur = cur->left;
+		}
+	}
     return NULL;
 }
 
@@ -192,7 +257,14 @@ TYPE _leftMost(struct Node *cur)
 /*----------------------------------------------------------------------------*/
 struct Node *_removeLeftMost(struct Node *cur)
 {
-    /*write this*/
+    /*FIXME:write this*/
+	if(cur->left->left == NULL) {
+		free(cur->left);
+		cur->left = NULL;
+	}
+	else {
+		_removeLeftMost(cur->left);
+	}
     return NULL;
 }
 /*
@@ -207,7 +279,7 @@ struct Node *_removeLeftMost(struct Node *cur)
 /*----------------------------------------------------------------------------*/
 struct Node *_removeNode(struct Node *cur, TYPE val)
 {
-    /*write this*/
+    /*FIXME:write this*/
     return NULL;
 
 }
@@ -507,16 +579,16 @@ int main(int argc, char *argv[]){
 
     //After implementing your code, please uncommnet the following calls to the test functions and test your code 
 
-    // testAddNode();
+    testAddNode();
 	
     printf("\n");
-    //	testContainsBSTree();
+    testContainsBSTree();
 	
     printf("\n");
-    //testLeftMost();
+    testLeftMost();
 	
     printf("\n");
-    //testRemoveLeftMost();
+    testRemoveLeftMost();
 	
     printf("\n");
     //testRemoveNode();
