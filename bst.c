@@ -124,9 +124,10 @@ int sizeBSTree(struct BSTree *tree) { return tree->cnt; }
 */
 struct Node *_addNode(struct Node *cur, TYPE val)
 {
+	struct Node * new = malloc(sizeof(struct Node));
     /*FIXME:write this*/	
 	if(cur == NULL) {
-		cur = malloc(sizeof(struct Node));
+		cur = new;
 		cur->val = val;
 		cur->left = NULL;
 		cur->right = NULL;
@@ -137,10 +138,10 @@ struct Node *_addNode(struct Node *cur, TYPE val)
 			_addNode(cur->left, val);
 		}
 		else {
-			struct Node * new = malloc(sizeof(struct Node));
 
 			new->val = val;
 			new->right = NULL;
+			new->left = NULL;
 			cur->left = new;
 			return(new);
 		}
@@ -150,17 +151,16 @@ struct Node *_addNode(struct Node *cur, TYPE val)
 			_addNode(cur->right, val);
 		}
 		else {
-			struct Node * new = malloc(sizeof(struct Node));
-
 			new->val = val;
 			new->left = NULL;
+			new->right = NULL;
 			cur->right = new;
 			return(new);
 		}
 	}
 	else if(compare(cur->val, val) == 0) {
 		printf("The value you input is already contained in the tree.");
-		return(NULL);
+		return(new);
 	}
 
     return NULL;
