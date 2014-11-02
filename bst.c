@@ -290,17 +290,37 @@ struct Node *_removeLeftMost(struct Node *cur)
 /*----------------------------------------------------------------------------*/
 struct Node *_removeNode(struct Node *cur, TYPE val)
 {
-	struct Node * left;
+	struct Node * toRm;
     /*FIXME:write this*/
 	if(cur != NULL) {
 		if(val != NULL) {
 			if(compare(cur->val, val) == 0) {
-				left = cur->right;
-				free(cur);
-				while(left->left != NULL) {
-					left = left->left;
+				if(cur->right == NULL && cur->left == NULL) {
+					free(cur);
+					return(NULL);
 				}
-				return(left);
+				else if(cur->right == NULL) {
+					toRm = cur->left;
+					cur->val = cur->left->val;
+					cur->left = cur->left->left;
+					cur->right = cur->left->right;
+					free(toRm);
+					return(cur);
+				}
+				else {
+					toRm = cur->right;
+					while(toRm->left != NULL) {
+						toRm = toRm->left;
+					}
+					cur->val = toRm->val;
+					cur = cur->right;
+					while(cur->left != toRm) {
+						cur = cur->left;
+					}
+					cur->left = NULL;
+					free(toRm);
+					return(cur);
+				}
 			}
 			else if(compare(cur->val, val) == 1) {
 				_removeNode(cur->left, val);
