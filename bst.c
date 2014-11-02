@@ -265,15 +265,18 @@ TYPE _leftMost(struct Node *cur)
 struct Node *_removeLeftMost(struct Node *cur)
 {
     /*FIXME:write this*/
+	struct Node * right;
 	if(cur != NULL) {
 		if(cur->left == NULL) {
+			right = cur->right;
 			free(cur);
+			return(right);
 		}
 		else {
 			_removeLeftMost(cur->left);
 		}
 	}
-    return NULL;
+    return(cur);
 }
 /*
   recursive helper function to remove a node from the tree
