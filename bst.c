@@ -318,7 +318,7 @@ struct Node *_removeNode(struct Node *cur, TYPE val)
 			}
 		}
 	}
-    return NULL;
+    return cur;
 
 }
 /*
