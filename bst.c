@@ -290,7 +290,7 @@ struct Node *_removeLeftMost(struct Node *cur)
 /*----------------------------------------------------------------------------*/
 struct Node *_removeNode(struct Node *cur, TYPE val)
 {
-	struct Node * toRm;
+	struct Node * temp;
     /*FIXME:write this*/
 	if(cur != NULL) {
 		if(val != NULL) {
@@ -300,25 +300,13 @@ struct Node *_removeNode(struct Node *cur, TYPE val)
 					return(NULL);
 				}
 				else if(cur->right == NULL) {
-					toRm = cur->left;
-					cur->val = cur->left->val;
-					cur->left = cur->left->left;
-					cur->right = cur->left->right;
-					free(toRm);
-					return(cur);
+					temp = cur->left;
+					free(cur);
+					return(temp);
 				}
 				else {
-					toRm = cur->right;
-					while(toRm->left != NULL) {
-						toRm = toRm->left;
-					}
-					cur->val = toRm->val;
-					cur = cur->right;
-					while(cur->left != toRm) {
-						cur = cur->left;
-					}
-					cur->left = NULL;
-					free(toRm);
+					cur->val = _leftMost(cur->right);
+					_removeLeftMost(cur->right);
 					return(cur);
 				}
 			}
