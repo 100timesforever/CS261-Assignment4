@@ -273,7 +273,7 @@ struct Node *_removeLeftMost(struct Node *cur)
 			return(right);
 		}
 		else {
-			_removeLeftMost(cur->left);
+			cur->left = _removeLeftMost(cur->left);
 		}
 	}
     return(cur);
@@ -323,10 +323,10 @@ struct Node *_removeNode(struct Node *cur, TYPE val)
 				}
 			}
 			else if(compare(cur->val, val) == 1) {
-				_removeNode(cur->left, val);
+				cur->left = _removeNode(cur->left, val);
 			}
 			else if(compare(cur->val, val) == -1) {
-				_removeNode(cur->right, val);
+				cur->right = _removeNode(cur->right, val);
 			}
 		}
 	}
