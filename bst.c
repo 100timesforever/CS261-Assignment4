@@ -124,8 +124,14 @@ int sizeBSTree(struct BSTree *tree) { return tree->cnt; }
 */
 struct Node *_addNode(struct Node *cur, TYPE val)
 {
-    /*FIXME:write this*/
-	
+    /*FIXME:write this*/	
+	if(cur == NULL) {
+		cur = malloc(sizeof(struct Node));
+		cur->val = val;
+		cur->left = NULL;
+		cur->right = NULL;
+		return(cur);
+	}
 	if(compare(cur->val, val) == 1) {
 		if(cur->left != NULL) {
 			_addNode(cur->left, val);
@@ -585,10 +591,10 @@ int main(int argc, char *argv[]){
     testContainsBSTree();
 	
     printf("\n");
-    testLeftMost();
+    //testLeftMost();
 	
     printf("\n");
-    testRemoveLeftMost();
+    //testRemoveLeftMost();
 	
     printf("\n");
     //testRemoveNode();
