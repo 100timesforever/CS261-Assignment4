@@ -290,7 +290,26 @@ struct Node *_removeLeftMost(struct Node *cur)
 /*----------------------------------------------------------------------------*/
 struct Node *_removeNode(struct Node *cur, TYPE val)
 {
+	struct Node * left;
     /*FIXME:write this*/
+	if(cur != NULL) {
+		if(val != NULL) {
+			if(compare(cur->val, val) == 0) {
+				left = cur->right;
+				free(cur);
+				while(left->left != NULL) {
+					left = left->left;
+				}
+				return(left);
+			}
+			else if(compare(cur->val, val) == 1) {
+				_removeNode(cur->left, val);
+			}
+			else if(compare(cur->val, val) == -1) {
+				_removeNode(cur->right, val);
+			}
+		}
+	}
     return NULL;
 
 }
@@ -602,7 +621,7 @@ int main(int argc, char *argv[]){
     testRemoveLeftMost();
 	
     printf("\n");
-    //testRemoveNode();
+    testRemoveNode();
 	
     return 0;
 }
