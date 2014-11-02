@@ -29,7 +29,7 @@ int compare(TYPE left, TYPE right)
 	struct data * l = left;
 	struct data * r = right;
     /*FIXME: write this*/
-	for(i=0; (l->name[i])!='\0' || (r->name[i])!='\0'; i++) {
+	for(i=0; (l->name[i])!='\0' && (r->name[i])!='\0'; i++) {
 		if(l->name[i] < r->name[i]) {
 			return(-1);
 		}
