@@ -265,12 +265,13 @@ TYPE _leftMost(struct Node *cur)
 struct Node *_removeLeftMost(struct Node *cur)
 {
     /*FIXME:write this*/
-	if(cur->left->left == NULL) {
-		free(cur->left);
-		cur->left = NULL;
-	}
-	else {
-		_removeLeftMost(cur->left);
+	if(cur != NULL) {
+		if(cur->left == NULL) {
+			free(cur);
+		}
+		else {
+			_removeLeftMost(cur->left);
+		}
 	}
     return NULL;
 }
@@ -592,10 +593,10 @@ int main(int argc, char *argv[]){
     testContainsBSTree();
 	
     printf("\n");
-    //testLeftMost();
+    testLeftMost();
 	
     printf("\n");
-    //testRemoveLeftMost();
+    testRemoveLeftMost();
 	
     printf("\n");
     //testRemoveNode();
