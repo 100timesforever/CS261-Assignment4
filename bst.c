@@ -393,9 +393,9 @@ struct BSTree *buildBSTTree() {
     myData2->number = 13;
     myData2->name = "lefty";
     myData3->number = 110;
-    myData3->name = "righty";
+    myData3->name = "route";
     myData4->number = 10;
-    myData4->name = "lefty of lefty";
+    myData4->name = "lefted";
 	
     /*add the values to BST*/
     addBSTree(tree, myData1);
@@ -464,7 +464,7 @@ void testAddNode() {
     
     
     myData3.number = 110;
-    myData3.name = "righty";
+    myData3.name = "route";
     addBSTree(tree, &myData3);
         
     //check the position of the third element that is added to the BST tree    
@@ -480,7 +480,7 @@ void testAddNode() {
 	printf("addNode() test: PASS when adding 110 as right of root\n");
     
     myData4.number = 10;
-    myData4.name = "righty of lefty";
+    myData4.name = "lefter";
     addBSTree(tree, &myData4);
     
     //check the position of the fourth element that is added to the BST tree
@@ -547,9 +547,9 @@ void testLeftMost() {
     struct data myData3, myData4;
 
     myData3.number = 110;
-    myData3.name = "righty";
+    myData3.name = "route";
     myData4.number = 10;
-    myData4.name = "lefty of lefty";
+    myData4.name = "lefter";
     
     printTestResult(compare(_leftMost(tree->root), &myData4) == 0, "_leftMost", "left most of root");
     
@@ -590,9 +590,9 @@ void testRemoveNode() {
     myData2.number = 13;
     myData2.name = "lefty";
     myData3.number = 110;
-    myData3.name = "righty";
+    myData3.name = "route";
     myData4.number = 10;
-    myData4.name = "lefty of lefty";
+    myData4.name = "lefted";
     
     _removeNode(tree->root, &myData4);
     printTestResult(compare(tree->root->val, &myData1) == 0 && tree->root->left->left == NULL, "_removeNode", "remove left of left of root 1st try");

@@ -23,22 +23,29 @@
   DO NOT compare the addresses pointed by left and right, i.e. "if (left < right)",
   which is really wrong.
  */
-int compare(TYPE left, TYPE right)
+int compare(TYPE l, TYPE r)
 {
-	int i;
-	struct data * l = left;
-	struct data * r = right;
     /*FIXME: write this*/
-	for(i=0; (l->name[i])!='\0' && (r->name[i])!='\0'; i++) {
-		if(l->name[i] < r->name[i]) {
-			return(-1);
-		}
-		else if(r->name[i] < l->name[i]) {
-			return(1);
+	int i = 0;
+	struct data * left = l;
+	struct data * right = r;
+	if(left != NULL && right != NULL) {
+		if(left->name != NULL && right->name != NULL) {
+			while(left->name[i]!='\0' || right->name[i]!='\0') {
+				if(left->name[i] > 65 && left->name[i] < 90) {
+					left->name[i] += 32;
+				}
+				if(right->name[i] > 65 && right->name[i] < 90) {
+					right->name[i] += 32;
+				}
+				if(left->name[i] < right->name[i] || left->name[i] == '\0') {return(-1);}
+				else if(right->name[i] < left->name[i] || right->name[i] == '\0') {return(1);}
+				i++;
+			}
+			return(0);
 		}
 	}
 	return(0);
-
 }
 
 /*Define this function, type casting the value of void * to the desired type*/
