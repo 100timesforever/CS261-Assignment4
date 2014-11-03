@@ -395,7 +395,7 @@ struct BSTree *buildBSTTree() {
     myData3->number = 110;
     myData3->name = "route";
     myData4->number = 10;
-    myData4->name = "lefted";
+    myData4->name = "lefter";
 	
     /*add the values to BST*/
     addBSTree(tree, myData1);
@@ -514,9 +514,9 @@ void testContainsBSTree() {
     myData2.number = 13;
     myData2.name = "lefty";
     myData3.number = 110;
-    myData3.name = "righty";
+    myData3.name = "route";
     myData4.number = 10;
-    myData4.name = "lefty of lefty";
+    myData4.name = "lefter";
     myData5.number = 111;
     myData5.name = "not in tree";
     
@@ -592,7 +592,7 @@ void testRemoveNode() {
     myData3.number = 110;
     myData3.name = "route";
     myData4.number = 10;
-    myData4.name = "lefted";
+    myData4.name = "lefter";
     
     _removeNode(tree->root, &myData4);
     printTestResult(compare(tree->root->val, &myData1) == 0 && tree->root->left->left == NULL, "_removeNode", "remove left of left of root 1st try");
